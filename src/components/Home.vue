@@ -1,8 +1,21 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+    interface headers{
+        title: string;
+        key: number;
+        itemKey: number;
+    }
+
+
+    const header: Headers[] = [
+
+    ]
+
+</script>
 
 <template>
-    <v-toolbar elevation="3">
-        <section class=" barra d-flex align-center justify-space-between ma-4">
+    <v-toolbar class="bg-light-blue-darken-2" elevation="3">
+        <section class=" barra-superior-header d-flex align-center justify-space-between ma-4">
 
             <div>
                 <v-toolbar-title  >
@@ -22,28 +35,45 @@
         </section>
     </v-toolbar>
 
-    <v-container class="d-flex align-center flex-column">
+    <v-card  class=" barra-superior-card " flat>
+        <v-card-title class="d-flex flex-row justify-space-between" >Equipamentos
+            <v-text-field 
+            class="barra-de-pesquisa"
+            density="compact"
+            label="PESQUISA"
+            prepend-inner-icon="mdi-magnify"
+            variant="outlined"
+            hide-details
+        
+            ></v-text-field>
+        </v-card-title>
 
-        <div>
-            <h2 class="text-h6">ITENS</h2>
+        <div class="d-flex align-center justify-end ma-4">
+            <v-btn 
+            class="bg-orange" 
+            
+            >Adicionar</v-btn>
         </div>
 
-        <div class="barra-de-pesquisa">
-            <v-text-field label="Pesquisar itens:" variant="outlined">
-            </v-text-field>    
-        </div>
-    </v-container>
+        
+
+    </v-card>
 </template>
 
 <style scoped>
-    .barra-de-pesquisa{
-        max-width: 100%;
+
+    .barra-superior-header{
         width: 100%;
+        max-width: 100%;
     }
 
-    .barra{
+    .barra-superior-card{
         width: 100%;
         max-width: 100%;
+    }
+
+    .barra-de-pesquisa{
+        max-width: 35%;
     }
 
 </style>
