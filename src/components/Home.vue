@@ -1,15 +1,5 @@
 <script setup lang="ts">
 
-    interface headers{
-        title: string;
-        key: number;
-        itemKey: number;
-    }
-
-
-    const header: Headers[] = [
-
-    ]
 
 </script>
 
@@ -55,8 +45,12 @@
             >Adicionar</v-btn>
         </div>
 
-        
-
+        <v-data-table
+            item-value="id"
+            items-per-page="5"
+            class="elevation-3"
+            >
+        </v-data-table>
     </v-card>
 </template>
 
