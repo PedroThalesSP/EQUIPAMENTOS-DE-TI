@@ -8,7 +8,7 @@
   const modificar = ref('')
   
   const state = reactive({
-    
+    abrirModalConfirmarDoAdicionar: true,
 
   })
   
@@ -21,7 +21,9 @@
   ];
   
   function abrirModalAdicionarItens(){
+    state.abrirModalConfirmarDoAdicionar = true
     console.log('adicionar')
+
   }
 
   function abrirModalRemoverItens(){
@@ -31,10 +33,6 @@
   function abrirModalModificarItens(){
     console.log('modificar');
   }
-
-
-
-
 
 </script>
 
@@ -106,6 +104,11 @@
     
     </div>
   </v-card>
+
+  <v-dialog max-width="100px" v-model="state.abrirModalConfirmarDoAdicionar" >
+    
+  </v-dialog>
+
 </template>
 
 <style scoped>
