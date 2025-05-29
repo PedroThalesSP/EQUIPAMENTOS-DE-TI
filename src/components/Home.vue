@@ -1,9 +1,17 @@
 <script setup lang="ts">
   import {ref} from 'vue'
+  import {reactive} from 'vue'
   import { id } from 'vuetify/locale'
+  
+  const adicionar = ref('')
+  const remover = ref('')
+  const modificar = ref('')
+  
+  const state = reactive({
+    
 
-  const pesquisa = ref('')
-
+  })
+  
   const items = [
     { id:1 , name:'João', image: '1' , value: 100 },
     { id:2 , name:'Joã', image: '2' , value: 200  },
@@ -11,6 +19,20 @@
     { id:4 , name:'J', image: '4' , value: 400  },
 
   ];
+  
+  function abrirModalAdicionarItens(){
+    console.log('adicionar')
+  }
+
+  function abrirModalRemoverItens(){
+    console.log('remover');
+  }
+
+  function abrirModalModificarItens(){
+    console.log('modificar');
+  }
+
+
 
 
 
@@ -60,9 +82,28 @@
     </v-data-table>
 
     <div class="d-flex align-center justify-center justify-sm-end ma-4 ga-2 ga-md-6 ">
-      <v-btn class=" botao bg-green">Adicionar</v-btn>
-      <v-btn class=" botao bg-red">Remover</v-btn>
-      <v-btn class=" botao bg-orange">Modificar</v-btn>
+      
+      <v-btn 
+        class=" botao bg-green"
+        v-model="adicionar"
+        @click="abrirModalAdicionarItens"
+        >Adicionar
+      </v-btn>
+
+      <v-btn 
+        class=" botao bg-red"
+        v-model="remover"
+        @click="abrirModalRemoverItens"
+        >Remover
+      </v-btn>
+
+      <v-btn 
+        class=" botao bg-orange"
+        v-model="modificar"
+        @click="abrirModalModificarItens"
+        >Modificar
+      </v-btn>
+    
     </div>
   </v-card>
 </template>
