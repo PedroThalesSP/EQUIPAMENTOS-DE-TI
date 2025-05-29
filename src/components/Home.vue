@@ -1,14 +1,13 @@
 <script setup lang="ts">
-  import {ref} from 'vue'
-  import {reactive} from 'vue'
-  import { id } from 'vuetify/locale'
+  import {ref} from 'vue';
+  import {reactive} from 'vue';
   
   const adicionar = ref('')
   const remover = ref('')
   const modificar = ref('')
   
   const state = reactive({
-    abrirModalConfirmarDoAdicionar: true,
+    abrirModalConfirmarDoAdicionar: false,
 
   })
   
@@ -104,9 +103,9 @@
     
     </div>
   </v-card>
-
-  <v-dialog max-width="100px" v-model="state.abrirModalConfirmarDoAdicionar" >
-    
+  
+  <v-dialog max-width="500"  v-model="state.abrirModalConfirmarDoAdicionar" z-index="1000">
+    <ModalAdicionar class="bg-white"> </ModalAdicionar>
   </v-dialog>
 
 </template>
