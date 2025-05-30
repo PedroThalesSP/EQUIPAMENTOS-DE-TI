@@ -3,11 +3,12 @@
   import {reactive} from 'vue';
   import ModalAdicionar from './ModalAdicionar.vue';
 
-  
   const adicionar = ref('')
   const remover = ref('')
   const modificar = ref('')
-  
+  const boxSelecionada = ref <Array<any>>([])
+
+
   const state = reactive({
     abrirModalConfirmarDoAdicionar: false,
 
@@ -17,20 +18,13 @@
     state.abrirModalConfirmarDoAdicionar = false;
   }
   
-  const items = [
-    { id:1 , name:'João', image: '1' , value: 100 },
-    { id:2 , name:'Joã', image: '2' , value: 200  },
-    { id:3 , name:'Jo', image: '3' , value: 300  },
-    { id:4 , name:'J', image: '4' , value: 400  },
-
-  ];
-  
   function abrirModalAdicionarItens(){
     state.abrirModalConfirmarDoAdicionar = true
     console.log('adicionar')
   }
 
   function abrirModalRemoverItens(){
+    console.log(boxSelecionada.value)
     console.log('remover');
   }
 
@@ -38,6 +32,13 @@
     console.log('modificar');
   }
 
+  //lista de objetos
+  const items = [
+    { id:1 , name:'João', image: '1' , value: 100 },
+    { id:2 , name:'Joã', image: '2' , value: 200  },
+    { id:3 , name:'Jo', image: '3' , value: 300  },
+    { id:4 , name:'J', image: '4' , value: 400  },
+  ];
 </script>
 
 <template>
@@ -47,7 +48,7 @@
     >
       <div>
         <v-toolbar-title>
-          <h4 class="texto-titulo ">Equipamentos de TI</h4>
+          <h4 class=" texto-titulo ">Equipamentos de TI</h4>
         </v-toolbar-title>
       </div>
 
@@ -64,7 +65,7 @@
 
   <v-card class="barra-superior-card" flat>
     <v-card-title class="d-flex flex-row justify-space-between">
-      <p class="d-none d-sm-block"> Equipamentos </p>
+      <p class="d-none d-sm-block"> Lista de Equipamentos </p>
       <v-text-field
         class="barra-de-pesquisa"
         density="compact"
@@ -80,6 +81,8 @@
       item-value="id" 
       items-per-page="5" 
       show-select
+      return-object
+      v-model="boxSelecionada"
       class="elevation-3 ">
     </v-data-table>
 
@@ -95,7 +98,7 @@
       <v-btn 
         class=" botao bg-red"
         v-model="remover"
-        @click="abrirModalRemoverItens"
+        @click="abrirModalRemoverItens()"
         >Remover
       </v-btn>
 
