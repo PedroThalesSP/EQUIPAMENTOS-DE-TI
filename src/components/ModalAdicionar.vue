@@ -1,8 +1,13 @@
 <script setup lang='ts'>
-import {ref} from 'vue'
-import {reactive} from 'vue'
+    import {ref} from 'vue';
+    import  Home  from "@/components/Home.vue";
+    import {reactive} from 'vue';
+    import { defineProps } from 'vue';
 
-console.log('algo')
+    const props = defineProps()
+
+    const emit = defineEmits(['cancelar'])
+        
 
 </script>
 
@@ -30,11 +35,13 @@ console.log('algo')
 
             <div class='d-flex align-center justify-end ga-5 ' >
 
-                <v-btn class='bg-green'>
+                <v-btn  class='bg-green'>
                     confirmar                    
                 </v-btn>
                 
-                <v-btn class='bg-red'>
+                <v-btn 
+                    @click="emit('cancelar')" 
+                    class='bg-red'>
                     cancelar
                 </v-btn>
                 

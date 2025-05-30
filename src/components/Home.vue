@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import {ref} from 'vue';
   import {reactive} from 'vue';
+  import ModalAdicionar from './ModalAdicionar.vue';
+
   
   const adicionar = ref('')
   const remover = ref('')
@@ -10,6 +12,10 @@
     abrirModalConfirmarDoAdicionar: false,
 
   })
+
+  function fecharModalAdicionarItens() {
+    state.abrirModalConfirmarDoAdicionar = false;
+  }
   
   const items = [
     { id:1 , name:'João', image: '1' , value: 100 },
@@ -22,7 +28,6 @@
   function abrirModalAdicionarItens(){
     state.abrirModalConfirmarDoAdicionar = true
     console.log('adicionar')
-
   }
 
   function abrirModalRemoverItens(){
@@ -105,7 +110,7 @@
   </v-card>
   
   <v-dialog max-width="500"  v-model="state.abrirModalConfirmarDoAdicionar" z-index="1000">
-    <ModalAdicionar class="bg-white"> </ModalAdicionar>
+    <ModalAdicionar @cancelar="fecharModalAdicionarItens" class="bg-white"> </ModalAdicionar>  <!-- teste -->
   </v-dialog>
 
 </template>
