@@ -3,6 +3,7 @@
   import {reactive} from 'vue';
   import ModalAdicionar from './ModalAdicionar.vue';
 
+
   const adicionar = ref('')
   const remover = ref('')
   const modificar = ref('')
@@ -33,7 +34,7 @@
   }
 
   //lista de objetos
-  const items = [
+  const items:{id:number, name:string, image:any, value:number}[] = [
     { id:1 , name:'João', image: '1' , value: 100 },
     { id:2 , name:'Joã', image: '2' , value: 200  },
     { id:3 , name:'Jo', image: '3' , value: 300  },
@@ -91,7 +92,7 @@
       <v-btn 
         class=" botao bg-green"
         v-model="adicionar"
-        @click="abrirModalAdicionarItens"
+        @click="abrirModalAdicionarItens()"
         >Adicionar
       </v-btn>
 
