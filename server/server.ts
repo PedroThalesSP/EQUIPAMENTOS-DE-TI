@@ -1,5 +1,7 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
+const app = express();
 
 app.get('/', function (req, res){
     res.send('<p> testando o back-end </p>')

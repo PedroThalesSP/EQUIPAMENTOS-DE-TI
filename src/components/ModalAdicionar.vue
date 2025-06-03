@@ -13,6 +13,13 @@ const entradaDeValores = ref();
 const props = defineProps();
 const emit = defineEmits(["cancelar"]);
 
+const formData = reactive({ // teste
+  id: '' ,
+  name:'' ,
+  image: '',
+  value: '', 
+})
+
 function adicionarDados() {
   const nomeAdicionar: String = entradaDeNome.value;
   const arquivoAdicionar: any = entradaDeArquivos.value;
@@ -49,11 +56,12 @@ function adicionarDados() {
 
 
 }
+
 </script>
 
 <template>
   <v-container>
-    <v-form>
+    <v-form  >
       <v-text-field density="compact" label="Nome:" v-model="entradaDeNome">
       </v-text-field>
 
