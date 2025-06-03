@@ -13,12 +13,12 @@ const entradaDeValores = ref();
 const props = defineProps();
 const emit = defineEmits(["cancelar"]);
 
-const formData = reactive({ // teste
-  id: '' ,
-  name:'' ,
-  image: '',
-  value: '', 
-})
+// const formData = reactive({ // teste
+//   id: '' ,
+//   name:'' ,
+//   image: '',
+//   value: '', 
+// })
 
 function adicionarDados() {
   const nomeAdicionar: String = entradaDeNome.value;
@@ -61,7 +61,7 @@ function adicionarDados() {
 
 <template>
   <v-container>
-    <v-form  >
+    <v-form >
       <v-text-field density="compact" label="Nome:" v-model="entradaDeNome">
       </v-text-field>
 
@@ -78,7 +78,7 @@ function adicionarDados() {
       </v-text-field>
 
       <div class="d-flex align-center justify-end ga-5">
-        <v-btn class="bg-green" @click="adicionarDados()"> confirmar </v-btn>
+        <v-btn class="bg-green" type="submit" @click="adicionarDados()"> confirmar </v-btn>
 
         <v-btn @click="emit('cancelar')" class="bg-red"> cancelar </v-btn>
       </div>
