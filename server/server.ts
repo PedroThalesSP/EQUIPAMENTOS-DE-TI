@@ -1,13 +1,23 @@
-// const mongoose = require('mongoose');
-
 const express = require('express');
-const bodyParser = require('body-parser')
+const mariadb = require('mariadb');
+const cors = require("cors")
 const app = express();
+const bodyParser = require('body-parser')
+const PORT = 3001;
 
-app.get('/', function (req, res){
-    res.send('<p> testando o back-end </p>')
+const pool = mariadb.createPool({
+    host:'localhost',
+    user: 'root',
+    password:'',
+    database: 'equipamentos-da-ti'
 })
 
-app.listen(3001, function(){
-    console.log("teste o back-end")
+pool.getConnection()
+    .then(conn =>{
+        console.log("conectado");
+        conn.release()
+    }) 
+    .catch (err =>{
+        console.log('erro ao conctar ao banco de dados',err)
 })
+    

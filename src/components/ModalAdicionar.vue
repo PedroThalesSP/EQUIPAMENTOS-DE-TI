@@ -13,13 +13,6 @@ const entradaDeValores = ref();
 const props = defineProps();
 const emit = defineEmits(["cancelar"]);
 
-// const formData = reactive({ // teste
-//   id: '' ,
-//   name:'' ,
-//   image: '',
-//   value: '', 
-// })
-
 function adicionarDados() {
   const nomeAdicionar: String = entradaDeNome.value;
   const arquivoAdicionar: any = entradaDeArquivos.value;
@@ -57,11 +50,29 @@ function adicionarDados() {
 
 }
 
+async function envioAcessoriosDeTi (){
+  try{
+    const response = await fetch('http://localhost:3001',{
+      method:'POST',
+      headers : {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        entradaDeNome: entradaDeNome.value,
+        entradaDeArquivos: entradaDeArquivos.value,
+        entradaDeValores: entradaDeNome.value
+      })
+    })
+    const data = await response.json()
+    console.log('Sucesso', data)
+  } catch(error){
+    console.log('erro', error)
+  }
+}
+
 </script>
 
 <template>
   <v-container>
-    <v-form >
+    <v-form @submit.prevent="envioAcessoriosDeTi" >
       <v-text-field density="compact" label="Nome:" v-model="entradaDeNome">
       </v-text-field>
 
@@ -80,7 +91,7 @@ function adicionarDados() {
       <div class="d-flex align-center justify-end ga-5">
         <v-btn class="bg-green" type="submit" @click="adicionarDados()"> confirmar </v-btn>
 
-        <v-btn @click="emit('cancelar')" class="bg-red"> cancelar </v-btn>
+        <v-btn type="submit" @click="emit('cancelar')" class="bg-red"> cancelar </v-btn>
       </div>
     </v-form>
   </v-container>
