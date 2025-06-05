@@ -14,12 +14,12 @@ const pool = mariadb.createPool({
     database: 'equipamentos-da-ti'
 })
 
-// app.use(express.json())
-// app.post('dados', (req,res) =>{
-//     console.log('dados recebidos', req.body)
-//     res.send('dados recebidos')
+app.use(express.json())
+app.post('dados', (req,res) =>{
+    console.log('dados recebidos', req.body)
+    res.send('dados recebidos')
 
-// })
+})
 
 
  app.listen(port, () => {

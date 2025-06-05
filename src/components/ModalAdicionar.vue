@@ -52,7 +52,7 @@
   // serve para ver se o front-end esta sendo conectado com o back-end
   fetch('http://localhost:3001/')
   .then(response => response.text())
-  .then (data => console.log ('responsta do back',data))
+  .then (data => console.log ('',data))
   .catch(err => console.log('erro',err))
 
 
