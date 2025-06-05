@@ -3,7 +3,7 @@ const mariadb = require('mariadb');
 const cors = require("cors")
 const app = express();
 const bodyParser = require('body-parser')
-const PORT = 3001;
+const port = 3001;
 
 const pool = mariadb.createPool({
     host:'localhost',
@@ -12,6 +12,10 @@ const pool = mariadb.createPool({
     database: 'equipamentos-da-ti'
 })
 
+ app.listen(port, () => {
+     console.log(`sevidor na ,${port}`)
+ } )
+
 pool.getConnection()
     .then(conn =>{
         console.log("conectado");
@@ -19,4 +23,8 @@ pool.getConnection()
     }) 
     .catch (err =>{
         console.log('erro ao conctar ao banco de dados',err)
+})
+
+app.get('/', (req,res)=>{
+    res.send("deu certo")
 })

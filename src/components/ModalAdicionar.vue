@@ -50,29 +50,34 @@ function adicionarDados() {
 
 }
 
-async function envioAcessoriosDeTi (){
-  try{
-    const response = await fetch('http://localhost:3001',{
-      method:'POST',
-      headers : {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        entradaDeNome: entradaDeNome.value,
-        entradaDeArquivos: entradaDeArquivos.value,
-        entradaDeValores: entradaDeNome.value
-      })
-    })
-    const data = await response.json()
-    console.log('Sucesso', data)
-  } catch(error){
-    console.log('erro', error)
-  }
-}
+// async function envioAcessoriosDeTi (){
+//   try{
+//     const response = await fetch('http://localhost:3001',{
+//       method:'POST',
+//       headers : {'Content-Type': 'application/json'},
+//       body: JSON.stringify({
+//         entradaDeNome: entradaDeNome.value,
+//         entradaDeArquivos: entradaDeArquivos.value,
+//         entradaDeValores: entradaDeNome.value
+//       })
+//     })
+//     const data = await response.json()
+//     console.log('Sucesso', data)
+//   } catch(error){
+//     console.log('erro', error)
+//   }
+// }
+
+fetch('http://localhost:3001/')
+  .then(response => response.text())
+  .then (data => console.log ('responsta do back',data))
+  .catch(err => console.log('erro',err))
 
 </script>
 
 <template>
   <v-container>
-    <v-form @submit.prevent="envioAcessoriosDeTi" >
+    <v-form @submit.prevent="" >
       <v-text-field density="compact" label="Nome:" v-model="entradaDeNome">
       </v-text-field>
 

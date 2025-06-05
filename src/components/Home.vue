@@ -11,7 +11,6 @@
 
   const state = reactive({
     abrirModalConfirmarDoAdicionar: false,
-
   })
 
   function fecharModalAdicionarItens() {
