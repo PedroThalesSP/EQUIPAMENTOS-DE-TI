@@ -3,7 +3,6 @@
   import {reactive} from 'vue';
   import ModalAdicionar from './ModalAdicionar.vue';
 
-
   const adicionar = ref('')
   const remover = ref('')
   const modificar = ref('')

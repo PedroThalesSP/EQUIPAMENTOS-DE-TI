@@ -20,4 +20,3 @@ pool.getConnection()
     .catch (err =>{
         console.log('erro ao conctar ao banco de dados',err)
 })
-    
