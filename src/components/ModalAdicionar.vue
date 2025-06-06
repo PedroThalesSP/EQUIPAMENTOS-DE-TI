@@ -47,48 +47,37 @@
 
     console.log(nomeAdicionar, valoresAdicionar, arquivoAdicionar)
 
-  }
+  }  
 
-  // serve para ver se o front-end esta sendo conectado com o back-end
-  fetch('http://localhost:3001/')
-  .then(response => response.text())
-  .then (data => console.log ('',data))
-  .catch(err => console.log('erro',err))
-
-
-  // serve para enviar os dados do front-end para o back-end
-  async function envioAcessoriosDeTi () { 
+  //Testando envio de dados por meio do fetch
+  function envioAcessoriosDeTi(){
     const envioNome = entradaDeNome.value;
     const envioArquivo = entradaDeArquivos.value;
     const envioPreco = entradaDeValores.value;
-
-    const dados = {
+    
+    const dadosDoFormulario = {
       envioNome: envioNome,
       envioArquivo: envioArquivo,
       envioPreco: envioPreco,
-    };
+    }
 
-    try {
-      const resposta = await fetch('http://localhost:3001', {
-        method:'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dados),
-    });
-  
+    fetch('http://localhost:3001/api/submit',{
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dadosDoFormulario),
+    })
 
-  if (resposta.ok){
-    alert('dados registrados')
-  } else {
-    alert("dados não registrados")
-  }} catch (erro){
-    alert('erro na rede')
-  }}
+    .then((response) => {
+      console.log("Resposta do servidos:", response);
+    })
 
+    .catch((error)=>{
+      console.log('erro ao enviar dados', error)
 
-
-
+    })
+  }
 
 </script>
 
