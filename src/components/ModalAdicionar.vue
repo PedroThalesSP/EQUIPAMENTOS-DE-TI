@@ -69,14 +69,14 @@
       body: JSON.stringify(dadosDoFormulario),
     })
 
-    .then((response) => {
-      console.log("Resposta do servidos:", response);
-    })
+    // .then((response) => {
+    //   console.log("Resposta do servidos:", response);
+    // })
 
-    .catch((error)=>{
-      console.log('erro ao enviar dados', error)
+    // .catch((error)=>{
+    //   console.log('erro ao enviar dados', error)
 
-    })
+    // })
   }
 
 </script>
