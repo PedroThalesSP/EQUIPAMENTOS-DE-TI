@@ -61,7 +61,7 @@
       envioPreco: envioPreco,
     }
 
-    fetch('http://localhost:3001/api/submit',{
+    fetch('http://localhost:3003/api/submit',{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',
