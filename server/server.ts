@@ -19,15 +19,15 @@ app.use(express.json())
         database: 'equipamentos_de_ti'
     })  
     app.post('/api/submit', async (req, res) => {
-        const { nome, preco } = req.body;
-        console.log('Dados do formulário:', req.body);
+        const { envioNome, envioPreco } = req.body;
+        console.log('Dados do formulário:', envioNome, envioPreco);
     
         try {
             const conn = await pool.getConnection();
     
             await conn.query(
-                "INSERT INTO equimantos (nome, value ) VALUES (name, value)",
-                [nome, preco]
+                "INSERT INTO equimantos (name, value ) VALUES (?, ?)",
+                [envioNome, envioPreco]
             );
     
             conn.release();
@@ -37,6 +37,8 @@ app.use(express.json())
             res.status(500).json({ erro: 'Erro ao salvar no banco de dados' });
         }
     });
+
+    console.log('envioNome')
 
     // app.post('/api/submit', (req,res) =>{
     //     const dadosQueVeioDoFormario = req.body
