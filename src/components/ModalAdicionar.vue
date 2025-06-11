@@ -2,6 +2,7 @@
   import { ref } from "vue";
   import { defineProps } from "vue";
   import { reactive } from "vue";
+  import { onMounted } from "vue";
 
   import Home from "@/components/Home.vue";
   import Swal from "sweetalert2";
@@ -10,6 +11,7 @@
   const entradaDeArquivos = ref();
   const entradaDeValores = ref();
   const entradaDeId = ref();
+  const dadosBanco = ref([])
 
   const props = defineProps();
   const emit = defineEmits(["cancelar"]);
@@ -85,6 +87,20 @@
     }
   }
 
+  // testando o recebimentos dos dados
+  onMounted(async ()=>{
+    try{
+      const respostaDados = await fetch ('http://localhost:3003/api/dados');
+      if(!respostaDados.ok){
+        throw new Error ('erro ao buscar dados')
+      }
+      dadosBanco.value = await respostaDados.json() // ver
+    } catch (erro){
+      console.log('erro na requisição',erro)
+    }
+    
+  })
+
 
 
 </script>
@@ -114,7 +130,7 @@
 
       <div class="d-flex align-center justify-end ga-5">
         <v-btn class="bg-green" type="submit" @click="adicionarDados()"> confirmar </v-btn>
-        <v-btn type="submit" @click="emit('cancelar')" class="bg-red"> cancelar </v-btn>
+        <!-- <v-btn type="submit" @click="emit('cancelar')" class="bg-red"> cancelar </v-btn> -->
       </div>
     </v-form>
   </v-container>
