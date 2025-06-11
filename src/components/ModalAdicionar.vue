@@ -91,6 +91,7 @@
   onMounted(async ()=>{
     try{
       const respostaDados = await fetch ('http://localhost:3003/api/dados');
+      
       if(!respostaDados.ok){
         throw new Error ('erro ao buscar dados')
       }
@@ -100,7 +101,8 @@
     }
     
   })
-
+  
+  console.log(dadosBanco)
 
 
 </script>
