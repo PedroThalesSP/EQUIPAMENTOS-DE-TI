@@ -9,6 +9,7 @@
   const entradaDeNome = ref();
   const entradaDeArquivos = ref();
   const entradaDeValores = ref();
+  const entradaDeId = ref();
 
   const props = defineProps();
   const emit = defineEmits(["cancelar"]);
@@ -50,51 +51,63 @@
   }  
 
   //Testando envio de dados por meio do fetch
-  function envioAcessoriosDeTi(){
-    const envioNome = entradaDeNome.value;
-    const envioArquivo = entradaDeArquivos.value;
-    const envioPreco = entradaDeValores.value;
-    
-    const dadosDoFormulario = {
-      envioNome: envioNome,
-      envioArquivo: envioArquivo,
-      envioPreco: envioPreco,
+  async function envioAcessoriosDeTi(){
+    try{
+
+      const envioDeId = entradaDeId.value;
+      const envioNome = entradaDeNome.value;
+      const envioUrl = entradaDeArquivos.value;
+      const envioPreco = entradaDeValores.value;
+      
+      const dadosDoFormulario = {
+        envioDeId: envioDeId,
+        envioNome: envioNome,
+        envioUrl: envioUrl,
+        envioPreco: envioPreco,
+      }
+       
+      const urlServidor = await fetch('http://localhost:3003/api/submit',{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosDoFormulario),
+      })
+      
+      if(urlServidor.ok){
+        const respostaDoServidor = urlServidor.json()
+        alert("Dados registrados com sucesso")
+      } else{
+        alert(" Erro ao registrar os dados",)
+      }
+    } catch(erro){
+      console.error("erro durante a requisição:",erro)
     }
-
-    fetch('http://localhost:3003/api/submit',{
-      method: 'POST',
-      headers:{
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dadosDoFormulario),
-    })
-
-    // .then((response) => {
-    //   console.log("Resposta do servidos:", response);
-    // })
-
-    // .catch((error)=>{
-    //   console.log('erro ao enviar dados', error)
-
-    // })
   }
+
+
 
 </script>
 
 <template>
   <v-container>
     <v-form @submit.prevent="envioAcessoriosDeTi" >
+
+      <v-text-field density="compact"
+      label="ID:"
+      v-model="entradaDeId"
+      >
+
+      </v-text-field>
+
       <v-text-field density="compact" label="Nome:" v-model="entradaDeNome">
       </v-text-field>
 
-      <v-file-input
-        label="File input"
-        density="compact"
+      <v-text-field density="compact"
+        label="Imagem"
         prepend-icon=""
-        variant="filled"
-        accept="image/png, image/jpeg, image/jpg"
         v-model="entradaDeArquivos"
-      ></v-file-input>
+      ></v-text-field>
 
       <v-text-field density="compact" label="Valor:" v-model="entradaDeValores">
       </v-text-field>
