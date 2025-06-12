@@ -13,8 +13,7 @@
   const entradaDeId = ref();
   const dadosBanco = ref([])
 
-  const props = defineProps();
-  const emit = defineEmits(["cancelar"]);
+  // const emit = defineEmits([cancelar]);
 
   function adicionarDados() {
     const nomeAdicionar: String = entradaDeNome.value;
@@ -95,21 +94,29 @@
       if(!respostaDados.ok){
         throw new Error ('erro ao buscar dados')
       }
-      dadosBanco.value = await respostaDados.json() // ver
+     dadosBanco.value = await respostaDados.json()
     } catch (erro){
       console.log('erro na requisição',erro)
     }
     
   })
-  
-  console.log(dadosBanco)
 
+  // teste passando variavel via props
+  // export {dadosBanco};
+
+  console.log(dadosBanco)
 
 </script>
 
 <template>
   <v-container>
     <v-form @submit.prevent="envioAcessoriosDeTi" >
+
+      <!-- <v-card v-for="item in dadosBanco"> 
+        <v-text-field>
+          {{ item }}
+        </v-text-field>
+      </v-card> -->
 
       <v-text-field density="compact"
       label="ID:"

@@ -1,7 +1,9 @@
 <script setup lang="ts">
   import {ref} from 'vue';
   import {reactive} from 'vue';
+  import { defineProps } from 'vue';
   import ModalAdicionar from './ModalAdicionar.vue';
+//  import { dadosBanco } from './ModalAdicionar.vue';
 
   const adicionar = ref('')
   const remover = ref('')
@@ -32,12 +34,19 @@
   }
 
   //lista de objetos
-  const items:{id:number, name:string, image:any, value:number}[] = [
+  
+  const items:{}[] = [
     { id:1 , name:'João', image: '1' , value: 100 },
     { id:2 , name:'Joã', image: '2' , value: 200  },
     { id:3 , name:'Jo', image: '3' , value: 300  },
     { id:4 , name:'J', image: '4' , value: 400  },
   ];
+
+  // const dadosFiltro = dadosBanco;
+  // console.log(dadosBanco)
+
+
+
 </script>
 
 <template>
