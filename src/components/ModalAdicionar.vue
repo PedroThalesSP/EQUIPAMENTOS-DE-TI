@@ -3,6 +3,7 @@
   import { defineProps } from "vue";
   import { reactive } from "vue";
   import { onMounted } from "vue";
+  import { defineEmits } from "vue";
 
   import Home from "@/components/Home.vue";
   import Swal from "sweetalert2";
@@ -102,7 +103,11 @@
   })
 
   // teste passando variavel via props
-  // export {dadosBanco};
+  const emits = defineEmits(['dadosBanco'])
+  onMounted(()=>{
+    emits('dadosBanco')
+  })
+  // export dadosBanco;
 
   console.log(dadosBanco)
 
