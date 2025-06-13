@@ -3,13 +3,12 @@
   import {reactive} from 'vue';
   import { defineProps } from 'vue';
   import ModalAdicionar from './ModalAdicionar.vue';
-//  import { dadosBanco } from './ModalAdicionar.vue';
 
   const adicionar = ref('')
   const remover = ref('')
   const modificar = ref('')
   const boxSelecionada = ref <Array<any>>([])
-
+  const itens = ref <any[]>([])
 
   const state = reactive({
     abrirModalConfirmarDoAdicionar: false,
@@ -21,7 +20,6 @@
   
   function abrirModalAdicionarItens(){
     state.abrirModalConfirmarDoAdicionar = true
-    console.log('adicionar')
   }
 
   function abrirModalRemoverItens(){
@@ -33,36 +31,16 @@
     console.log('modificar');
   }
 
-  // <!-- teste de recebimento dos dados  -->
-  // lista de objetos
-  // const items:{}[] = [
-  //   { id:1 , name:'João', image: '1' , value: 100 },
-  //   { id:2 , name:'Joã', image: '2' , value: 200  },
-  //   { id:3 , name:'Jo', image: '3' , value: 300  },
-  //   { id:4 , name:'J', image: '4' , value: 400  },
-  // ];
-
-  function exibirDados(dados, ){
+  function exibirDados(dados: any[]){
     const dadosDaModalAdicionar = dados;
-    const id = dadosDaModalAdicionar.map(obj => obj.id)
-    const name = dadosDaModalAdicionar.map(obj => obj.name)
-    const image = dadosDaModalAdicionar.map(obj => obj.image)
-    const value = dadosDaModalAdicionar.map(obj => obj.value)
 
-    const itens:{}[] = [
-      { id: id , name: name, image: image, value: value}
-    ]
-    
-    console.log(dados)
-    console.log(id, name, image, value)
-    console.log(itens)
-    
-    return itens
+    itens.value = dadosDaModalAdicionar.map(obj => ({ 
+      id: obj.id, 
+      name: obj.name, 
+      image: obj.image, 
+      value: obj.value
+    }))
   }
-
-  let teste = exibirDados
-  console.log(teste)
-  console.log(exibirDados)
 
 </script>
 
@@ -104,6 +82,7 @@
     <!-- teste de recebimento dos dados  -->
     <!-- :items="items"  -->
       <v-data-table
+        :items = "itens"
         item-value="id" 
         items-per-page="5" 
         show-select
