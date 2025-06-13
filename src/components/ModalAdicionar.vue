@@ -103,11 +103,7 @@
     } catch (erro){
       console.log('erro na requisição',erro)
     }
-    
   })
-
-  // teste passando variavel via props
-  // console.log(dadosBanco)
 
 </script>
 
@@ -142,7 +138,7 @@
 
       <div class="d-flex align-center justify-end ga-5">
         <v-btn class="bg-green" type="submit" @click="adicionarDados()"> confirmar </v-btn>
-        <!-- <v-btn type="submit" @click="emit('cancelar')" class="bg-red"> cancelar </v-btn> -->
+        <!-- <v-btn type="" @click="emit('cancelar')" class="bg-red"> cancelar </v-btn> -->
       </div>
     </v-form>
   </v-container>

@@ -79,8 +79,6 @@
       ></v-text-field>
     </v-card-title>
 
-    <!-- teste de recebimento dos dados  -->
-    <!-- :items="items"  -->
       <v-data-table
         :items = "itens"
         item-value="id" 
@@ -90,8 +88,6 @@
         v-model="boxSelecionada"
         class="elevation-3 ">
       </v-data-table>
-    <!-- teste de recebimento dos dados  -->
-
 
     <div class="d-flex align-center justify-center justify-sm-end ma-4 ga-2 ga-md-6 ">
       
