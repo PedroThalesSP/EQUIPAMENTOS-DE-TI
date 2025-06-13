@@ -15,6 +15,7 @@
   const dadosBanco = ref([])
 
   // const emit = defineEmits([cancelar]);
+  const emits = defineEmits(['dadosBanco'])
 
   function adicionarDados() {
     const nomeAdicionar: String = entradaDeNome.value;
@@ -96,6 +97,9 @@
         throw new Error ('erro ao buscar dados')
       }
      dadosBanco.value = await respostaDados.json()
+
+     emits('dadosBanco',dadosBanco.value)
+
     } catch (erro){
       console.log('erro na requisição',erro)
     }
@@ -103,13 +107,7 @@
   })
 
   // teste passando variavel via props
-  const emits = defineEmits(['dadosBanco'])
-  onMounted(()=>{
-    emits('dadosBanco')
-  })
-  // export dadosBanco;
-
-  console.log(dadosBanco)
+  // console.log(dadosBanco)
 
 </script>
 

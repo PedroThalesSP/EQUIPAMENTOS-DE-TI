@@ -33,19 +33,36 @@
     console.log('modificar');
   }
 
-  //lista de objetos
-  
-  const items:{}[] = [
-    { id:1 , name:'João', image: '1' , value: 100 },
-    { id:2 , name:'Joã', image: '2' , value: 200  },
-    { id:3 , name:'Jo', image: '3' , value: 300  },
-    { id:4 , name:'J', image: '4' , value: 400  },
-  ];
+  // <!-- teste de recebimento dos dados  -->
+  // lista de objetos
+  // const items:{}[] = [
+  //   { id:1 , name:'João', image: '1' , value: 100 },
+  //   { id:2 , name:'Joã', image: '2' , value: 200  },
+  //   { id:3 , name:'Jo', image: '3' , value: 300  },
+  //   { id:4 , name:'J', image: '4' , value: 400  },
+  // ];
 
-  // const dadosFiltro = dadosBanco;
-  // console.log(dadosBanco)
+  function exibirDados(dados, ){
+    const dadosDaModalAdicionar = dados;
+    const id = dadosDaModalAdicionar.map(obj => obj.id)
+    const name = dadosDaModalAdicionar.map(obj => obj.name)
+    const image = dadosDaModalAdicionar.map(obj => obj.image)
+    const value = dadosDaModalAdicionar.map(obj => obj.value)
 
+    const itens:{}[] = [
+      { id: id , name: name, image: image, value: value}
+    ]
+    
+    console.log(dados)
+    console.log(id, name, image, value)
+    console.log(itens)
+    
+    return itens
+  }
 
+  let teste = exibirDados
+  console.log(teste)
+  console.log(exibirDados)
 
 </script>
 
@@ -84,15 +101,18 @@
       ></v-text-field>
     </v-card-title>
 
-    <v-data-table
-      :items="items"
-      item-value="id" 
-      items-per-page="5" 
-      show-select
-      return-object
-      v-model="boxSelecionada"
-      class="elevation-3 ">
-    </v-data-table>
+    <!-- teste de recebimento dos dados  -->
+    <!-- :items="items"  -->
+      <v-data-table
+        item-value="id" 
+        items-per-page="5" 
+        show-select
+        return-object
+        v-model="boxSelecionada"
+        class="elevation-3 ">
+      </v-data-table>
+    <!-- teste de recebimento dos dados  -->
+
 
     <div class="d-flex align-center justify-center justify-sm-end ma-4 ga-2 ga-md-6 ">
       
@@ -121,7 +141,11 @@
   </v-card>
   
   <v-dialog max-width="500"  v-model="state.abrirModalConfirmarDoAdicionar" z-index="1000">
-    <ModalAdicionar @cancelar="fecharModalAdicionarItens" class="bg-white"> </ModalAdicionar>  <!-- teste -->
+    <ModalAdicionar 
+    @cancelar="fecharModalAdicionarItens"
+    @dadosBanco="exibirDados" 
+    class="bg-white"> 
+    </ModalAdicionar>  <!-- teste -->
   </v-dialog>
 
 </template>
