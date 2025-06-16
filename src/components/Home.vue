@@ -4,13 +4,17 @@ import { reactive } from 'vue';
 import { defineProps } from 'vue';
 import ModalAdicionar from './ModalAdicionar.vue';
 
-
 const adicionar = ref('')
 const remover = ref('')
 const modificar = ref('')
-const idRawValueProduto = ref('')
+const envioDeleteBackend = ref('')
 const boxSelecionada = ref<Array<any>>([])
 const itens = ref<any[]>([])
+
+
+const props = defineProps({
+
+})
 
 const state = reactive({
   abrirModalConfirmarDoAdicionar: false,
@@ -23,56 +27,32 @@ function fecharModalAdicionarItens() {
 function abrirModalAdicionarItens() {
   state.abrirModalConfirmarDoAdicionar = true
 }
-  
-  function abrirModalModificarItens() {
-    console.log('modificar');
-  }
-  
-  function exibirDados(dados: any[]) {
-    const dadosDaModalAdicionar = dados;
-    
-    itens.value = dadosDaModalAdicionar.map(obj => ({
-      id: obj.id,
-      name: obj.name,
-      image: obj.image,
-      value: obj.value
-    }))
-  }
-  
-  // teste
-  function abrirModalRemoverItens() {
-    const envioDeleteBackend = boxSelecionada.value.map(item => item.id);
-    console.log(idRawValueProduto)
-  }
 
-  async function envioAcessoriosDeTi(){
-    try{
+function abrirModalModificarItens() {
+  console.log('modificar');
+}
 
-      const envioDeleteBackend = idRawValueProduto;
-      
-      const dadosDeleteBackend = {
-       envioDeleteBackend :envioDeleteBackend ,
+function exibirDados(dados: any[]) {
+  const dadosDaModalAdicionar = dados;
 
-      }
-       
-      const urlServidor = await fetch('http://localhost:3003/api/delete',{
-        method: 'POST',
-        headers:{
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dadosDeleteBackend),
-      })
-      
-      if(urlServidor.ok){
-        const respostaDoServidor = urlServidor.json()
-        alert("Dados registrados com sucesso")
-      } else{
-        alert(" Erro ao registrar os dados",)
-      }
-    } catch(erro){
-      console.error("erro durante a requisição:",erro)
-    }
-  }
+  itens.value = dadosDaModalAdicionar.map(obj => ({
+    id: obj.id,
+    name: obj.name,
+    image: obj.image,
+    value: obj.value
+  }))
+}
+
+// teste
+function abrirModalRemoverItens() {
+  const envioDeleteBackend = boxSelecionada.value.map(item => item.id);
+
+  console.log(boxSelecionada)
+  console.log(envioDeleteBackend)
+}
+// o dado tem que ser passado do pai para o filho e o tratamento ser
+// feito nesse, para que se comunique diretamente com o back-end e faça
+// comparações com o bd
 
 //fim teste
 
@@ -126,7 +106,7 @@ function abrirModalAdicionarItens() {
 
   <v-dialog max-width="500" v-model="state.abrirModalConfirmarDoAdicionar" z-index="1000">
     <ModalAdicionar @cancelar="fecharModalAdicionarItens" @dadosBanco="exibirDados" class="bg-white">
-    </ModalAdicionar> <!-- teste -->
+    </ModalAdicionar>
   </v-dialog>
 
 </template>
