@@ -8,6 +8,7 @@ import ModalAdicionar from './ModalAdicionar.vue';
 const adicionar = ref('')
 const remover = ref('')
 const modificar = ref('')
+const idRawValueProduto = ref('')
 const boxSelecionada = ref<Array<any>>([])
 const itens = ref<any[]>([])
 
@@ -22,52 +23,56 @@ function fecharModalAdicionarItens() {
 function abrirModalAdicionarItens() {
   state.abrirModalConfirmarDoAdicionar = true
 }
+  
+  function abrirModalModificarItens() {
+    console.log('modificar');
+  }
+  
+  function exibirDados(dados: any[]) {
+    const dadosDaModalAdicionar = dados;
+    
+    itens.value = dadosDaModalAdicionar.map(obj => ({
+      id: obj.id,
+      name: obj.name,
+      image: obj.image,
+      value: obj.value
+    }))
+  }
+  
+  // teste
+  function abrirModalRemoverItens() {
+    const envioDeleteBackend = boxSelecionada.value.map(item => item.id);
+    console.log(idRawValueProduto)
+  }
 
-function abrirModalRemoverItens() {
-  const idRawValueProduto = boxSelecionada.value.map(item => item.id);
+  async function envioAcessoriosDeTi(){
+    try{
 
-  console.log(idRawValueProduto)
+      const envioDeleteBackend = idRawValueProduto;
+      
+      const dadosDeleteBackend = {
+       envioDeleteBackend :envioDeleteBackend ,
 
-}
-
-app.delete('id'), async (req,res){
-  console.log()
-}
-
-function abrirModalModificarItens() {
-  console.log('modificar');
-}
-
-function exibirDados(dados: any[]) {
-  const dadosDaModalAdicionar = dados;
-
-  itens.value = dadosDaModalAdicionar.map(obj => ({
-    id: obj.id,
-    name: obj.name,
-    image: obj.image,
-    value: obj.value
-  }))
-}
-
-// teste
-// const urlServidor = await fetch('http://localhost:3003/api/submit', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify(''),
-// })
-
-// if (urlServidor.ok) {
-//   const respostaDoServidor = urlServidor.json()
-//   alert("Dados registrados com sucesso")
-// } else {
-//   alert(" Erro ao registrar os dados",)
-// }
-//     } catch (erro) {
-//   console.error("erro durante a requisição:", erro)
-// }
-//   }
+      }
+       
+      const urlServidor = await fetch('http://localhost:3003/api/delete',{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosDeleteBackend),
+      })
+      
+      if(urlServidor.ok){
+        const respostaDoServidor = urlServidor.json()
+        alert("Dados registrados com sucesso")
+      } else{
+        alert(" Erro ao registrar os dados",)
+      }
+    } catch(erro){
+      console.error("erro durante a requisição:",erro)
+    }
+  }
 
 //fim teste
 
