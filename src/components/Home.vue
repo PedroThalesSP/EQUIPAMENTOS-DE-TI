@@ -1,54 +1,81 @@
 <script setup lang="ts">
-  import {ref} from 'vue';
-  import {reactive} from 'vue';
-  import { defineProps } from 'vue';
-  import ModalAdicionar from './ModalAdicionar.vue';
+import { ref } from 'vue';
+import { reactive } from 'vue';
+import { defineProps } from 'vue';
+import ModalAdicionar from './ModalAdicionar.vue';
 
-  const adicionar = ref('')
-  const remover = ref('')
-  const modificar = ref('')
-  const boxSelecionada = ref <Array<any>>([])
-  const itens = ref <any[]>([])
 
-  const state = reactive({
-    abrirModalConfirmarDoAdicionar: false,
-  })
+const adicionar = ref('')
+const remover = ref('')
+const modificar = ref('')
+const boxSelecionada = ref<Array<any>>([])
+const itens = ref<any[]>([])
 
-  function fecharModalAdicionarItens() {
-    state.abrirModalConfirmarDoAdicionar = false;
-  }
-  
-  function abrirModalAdicionarItens(){
-    state.abrirModalConfirmarDoAdicionar = true
-  }
+const state = reactive({
+  abrirModalConfirmarDoAdicionar: false,
+})
 
-  function abrirModalRemoverItens(){
-    console.log(boxSelecionada.value)
-    console.log('remover');
-  }
+function fecharModalAdicionarItens() {
+  state.abrirModalConfirmarDoAdicionar = false;
+}
 
-  function abrirModalModificarItens(){
-    console.log('modificar');
-  }
+function abrirModalAdicionarItens() {
+  state.abrirModalConfirmarDoAdicionar = true
+}
 
-  function exibirDados(dados: any[]){
-    const dadosDaModalAdicionar = dados;
+function abrirModalRemoverItens() {
+  const idRawValueProduto = boxSelecionada.value.map(item => item.id);
 
-    itens.value = dadosDaModalAdicionar.map(obj => ({ 
-      id: obj.id, 
-      name: obj.name, 
-      image: obj.image, 
-      value: obj.value
-    }))
-  }
+  console.log(idRawValueProduto)
+
+}
+
+app.delete('id'), async (req,res){
+  console.log()
+}
+
+function abrirModalModificarItens() {
+  console.log('modificar');
+}
+
+function exibirDados(dados: any[]) {
+  const dadosDaModalAdicionar = dados;
+
+  itens.value = dadosDaModalAdicionar.map(obj => ({
+    id: obj.id,
+    name: obj.name,
+    image: obj.image,
+    value: obj.value
+  }))
+}
+
+// teste
+// const urlServidor = await fetch('http://localhost:3003/api/submit', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify(''),
+// })
+
+// if (urlServidor.ok) {
+//   const respostaDoServidor = urlServidor.json()
+//   alert("Dados registrados com sucesso")
+// } else {
+//   alert(" Erro ao registrar os dados",)
+// }
+//     } catch (erro) {
+//   console.error("erro durante a requisição:", erro)
+// }
+//   }
+
+//fim teste
 
 </script>
 
 <template>
   <v-toolbar class="bg-light-blue-darken-2" elevation="3">
-    <section
-      class="barra-superior-header d-flex align-center justify-space-between ma-4"
-    >
+    <section class="barra-superior-header d-flex align-center justify-space-between ma-4">
       <div>
         <v-toolbar-title>
           <h4 class=" texto-titulo ">Equipamentos de TI</h4>
@@ -69,58 +96,32 @@
   <v-card class="barra-superior-card" flat>
     <v-card-title class="d-flex flex-row justify-space-between">
       <p class="d-none d-sm-block"> Lista de Equipamentos </p>
-      <v-text-field
-        class="barra-de-pesquisa"
-        density="compact"
-        label="PESQUISA"
-        prepend-inner-icon="mdi-magnify"
-        variant="outlined"
-        hide-details
-      ></v-text-field>
+      <v-text-field class="barra-de-pesquisa" density="compact" label="PESQUISA" prepend-inner-icon="mdi-magnify"
+        variant="outlined" hide-details></v-text-field>
     </v-card-title>
 
-      <v-data-table
-        :items = "itens"
-        item-value="id" 
-        items-per-page="5" 
-        show-select
-        return-object
-        v-model="boxSelecionada"
-        class="elevation-3 ">
-      </v-data-table>
+    <v-data-table :items="itens" item-value="id" items-per-page="5" show-select return-object v-model="boxSelecionada"
+      class="elevation-3 ">
+
+    </v-data-table>
 
     <div class="d-flex align-center justify-center justify-sm-end ma-4 ga-2 ga-md-6 ">
-      
-      <v-btn 
-        class=" botao bg-green"
-        v-model="adicionar"
-        @click="abrirModalAdicionarItens()"
-        >Adicionar
+
+      <v-btn class=" botao bg-green" v-model="adicionar" @click="abrirModalAdicionarItens()">Adicionar
       </v-btn>
 
-      <v-btn 
-        class=" botao bg-red"
-        v-model="remover"
-        @click="abrirModalRemoverItens()"
-        >Remover
+      <v-btn class=" botao bg-red" v-model="remover" @click="abrirModalRemoverItens()">Remover
       </v-btn>
 
-      <v-btn 
-        class=" botao bg-orange"
-        v-model="modificar"
-        @click="abrirModalModificarItens"
-        >Modificar
+      <v-btn class=" botao bg-orange" v-model="modificar" @click="abrirModalModificarItens">Modificar
       </v-btn>
-    
+
     </div>
   </v-card>
-  
-  <v-dialog max-width="500"  v-model="state.abrirModalConfirmarDoAdicionar" z-index="1000">
-    <ModalAdicionar 
-    @cancelar="fecharModalAdicionarItens"
-    @dadosBanco="exibirDados" 
-    class="bg-white"> 
-    </ModalAdicionar>  <!-- teste -->
+
+  <v-dialog max-width="500" v-model="state.abrirModalConfirmarDoAdicionar" z-index="1000">
+    <ModalAdicionar @cancelar="fecharModalAdicionarItens" @dadosBanco="exibirDados" class="bg-white">
+    </ModalAdicionar> <!-- teste -->
   </v-dialog>
 
 </template>
@@ -140,18 +141,17 @@
   max-width: 35%;
 }
 
-.botao{
+.botao {
   max-width: 34%;
 }
 
-@media (max-width: 600px ) {
+@media (max-width: 600px) {
   .barra-de-pesquisa {
-     max-width: 100%;
+    max-width: 100%;
   }
 
-  .texto-titulo{
+  .texto-titulo {
     font-size: 1rem;
   }
 }
-
 </style>

@@ -38,6 +38,8 @@ app.post('/api/submit', async (req, res) => {
     }
 });
 
+
+
 //teste para mandar dados para o fron-end
 app.get('/api/dados', async (req,res)=>{
     try {
