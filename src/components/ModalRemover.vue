@@ -18,7 +18,7 @@ async function enviandoDadosRemoviveis() {
         // number, fazer a comparação com o bd e deleta-los
         const dadosDeExclusaoBackend = props.dadosDaHome;
         const dadosDeExclusaoIdBackend = dadosDeExclusaoBackend?.map(item => item.id)
-        console.log(typeof dadosDeExclusaoIdBackend[0]) 
+        console.log(dadosDeExclusaoIdBackend[0]) 
         
         const urlDeleteServer = await fetch ("http://localhost:3003/api/delete", {
             method: 'POST',
