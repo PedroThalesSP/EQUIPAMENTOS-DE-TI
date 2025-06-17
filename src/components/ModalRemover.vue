@@ -13,9 +13,12 @@ const nomeItensDeletar = computed(() => {
 
 async function enviandoDadosRemoviveis() {
     try {
+
+        // ver em casa o que esta acontecendo dentro do nosso array de objetos, pegar um por um dos dados do array, ver se são
+        // number, fazer a comparação com o bd e deleta-los
         const dadosDeExclusaoBackend = props.dadosDaHome;
-        const dadosDeExclusaoIdBackend = dadosDeExclusaoBackend?.map(item => item.id.parseInt)
-        console.log(typeof dadosDeExclusaoIdBackend) 
+        const dadosDeExclusaoIdBackend = dadosDeExclusaoBackend?.map(item => item.id)
+        console.log(typeof dadosDeExclusaoIdBackend[0]) 
         
         const urlDeleteServer = await fetch ("http://localhost:3003/api/delete", {
             method: 'POST',
