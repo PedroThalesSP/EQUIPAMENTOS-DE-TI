@@ -1,7 +1,5 @@
 <script setup lang="ts">
   import { ref } from "vue";
-  import { defineProps } from "vue";
-  import { reactive } from "vue";
   import { onMounted } from "vue";
   import { defineEmits } from "vue";
 
@@ -105,19 +103,11 @@
 
   })
 
-
-
 </script>
 
-<template>
-  <v-container>
-    <v-form @submit.prevent="envioAcessoriosDeTi" >
-
-      <!-- <v-card v-for="item in dadosBanco"> 
-        <v-text-field>
-          {{ item }}
-        </v-text-field>
-      </v-card> -->
+<template >
+  <v-container >
+    <v-form @submit.prevent="envioAcessoriosDeTi"  >
 
       <v-text-field density="compact"
       label="ID:"

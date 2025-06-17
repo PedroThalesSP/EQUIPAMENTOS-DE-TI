@@ -44,8 +44,6 @@ app.post("/api/submit", async (req, res) => {
   }
 });
 
-
-
 //teste para mandar dados para o fron-end
 app.get("/api/dados", async (req, res) => {
   try {
@@ -55,5 +53,21 @@ app.get("/api/dados", async (req, res) => {
     res.status(500).json({ erro: "erro ao buscar dados" });
   }
 });
+
+// teste delete
+app.post("api/delete", async (req, res) => {
+  const {dadosDeExclusaoBackend} = req.body;
+  try {
+    const conn = await pool.getConnection();
+    await conn.query(
+      ""
+    )
+
+    conn.release()
+    res.status(200).json({mensagem: "Dados apagados com sucesso"})
+  } catch(err){
+    res.status(500).json({erro: "Erro ao apagar os dados"})
+  }
+})
 
 console.log();
