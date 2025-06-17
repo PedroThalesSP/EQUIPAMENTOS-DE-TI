@@ -14,14 +14,6 @@
   const entradaDeId = ref();
   const dadosBanco = ref([])
 
-  //teste
-
-  const props = defineProps({
-    dadosDaHome: Array
-  })
-   console.log(props.dadosDaHome)
-
-  // const emit = defineEmits([cancelar]);
   const emits = defineEmits(['dadosBanco'])
 
   function adicionarDados() {

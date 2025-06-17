@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { reactive } from 'vue';
-import ModalAdicionar from './ModalAdicionar.vue';
-import ModalRemover from './ModalRemover.vue';
 
 const adicionar = ref('')
 const remover = ref('')
@@ -13,14 +11,19 @@ const envioDeleteBackend = ref <any[]>([])
 
 const state = reactive({
   abrirModalConfirmarDoAdicionar: false,
+  abrirModalConfirmarDelete: false,
 })
-
-function fecharModalAdicionarItens() {
-  state.abrirModalConfirmarDoAdicionar = false;
-}
 
 function abrirModalAdicionarItens() {
   state.abrirModalConfirmarDoAdicionar = true
+}
+
+function abrirModalRemover(){
+  state.abrirModalConfirmarDelete = true
+  envioDeleteBackend.value = boxSelecionada.value.map(item => ({
+    id:item.id,
+    name:item.name
+  }));
 }
 
 function abrirModalModificarItens() {
@@ -37,12 +40,6 @@ function exibirDados(dados: any[]) {
     value: obj.value
   }))
 }
-
-// teste
-function abrirModalRemoverItens() {
-   envioDeleteBackend.value = boxSelecionada.value.map(item => item.id);
-}
-//fim teste
 
 </script>
 
@@ -83,7 +80,7 @@ function abrirModalRemoverItens() {
       <v-btn class=" botao bg-green" v-model="adicionar" @click="abrirModalAdicionarItens()"> Adicionar
       </v-btn>
 
-      <v-btn class=" botao bg-red" v-model="remover" @click="abrirModalRemoverItens()"> Remover
+      <v-btn class=" botao bg-red" v-model="remover" @click="abrirModalRemover()"> Remover
       </v-btn>
 
       <v-btn class=" botao bg-orange" v-model="modificar" @click="abrirModalModificarItens"> Modificar
@@ -93,14 +90,14 @@ function abrirModalRemoverItens() {
   </v-card>
 
   <v-dialog max-width="500" v-model="state.abrirModalConfirmarDoAdicionar" z-index="1000">
-    <ModalAdicionar @cancelar="fecharModalAdicionarItens" @dadosBanco="exibirDados" :dadosDaHome="envioDeleteBackend"  class="bg-white">
+    <ModalAdicionar @dadosBanco="exibirDados" class="bg-white">
     </ModalAdicionar>
-
-    <ModalRemover>
-    </ModalRemover>
-
   </v-dialog>
-
+  
+  <v-dialog max-width="500" v-model="state.abrirModalConfirmarDelete" z-index="1000">
+    <ModalRemover :dadosDaHome="envioDeleteBackend" >
+    </ModalRemover>
+  </v-dialog>
 </template>
 
 <style scoped>
