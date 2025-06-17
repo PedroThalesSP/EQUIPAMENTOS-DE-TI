@@ -14,6 +14,13 @@
   const entradaDeId = ref();
   const dadosBanco = ref([])
 
+  //teste
+
+  const props = defineProps({
+    dadosDaHome: Array
+  })
+   console.log(props.dadosDaHome)
+
   // const emit = defineEmits([cancelar]);
   const emits = defineEmits(['dadosBanco'])
 
@@ -103,9 +110,10 @@
     } catch (erro){
       console.log('erro na requisição',erro)
     }
+
   })
 
-  //teste
+
 
 </script>
 

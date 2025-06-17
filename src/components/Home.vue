@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { reactive } from 'vue';
-import { defineProps } from 'vue';
 import ModalAdicionar from './ModalAdicionar.vue';
+import ModalRemover from './ModalRemover.vue';
 
 const adicionar = ref('')
 const remover = ref('')
 const modificar = ref('')
-const envioDeleteBackend = ref('')
 const boxSelecionada = ref<Array<any>>([])
 const itens = ref<any[]>([])
-
-
-const props = defineProps({
-
-})
+const envioDeleteBackend = ref <any[]>([])
 
 const state = reactive({
   abrirModalConfirmarDoAdicionar: false,
@@ -45,15 +40,8 @@ function exibirDados(dados: any[]) {
 
 // teste
 function abrirModalRemoverItens() {
-  const envioDeleteBackend = boxSelecionada.value.map(item => item.id);
-
-  console.log(boxSelecionada)
-  console.log(envioDeleteBackend)
+   envioDeleteBackend.value = boxSelecionada.value.map(item => item.id);
 }
-// o dado tem que ser passado do pai para o filho e o tratamento ser
-// feito nesse, para que se comunique diretamente com o back-end e faça
-// comparações com o bd
-
 //fim teste
 
 </script>
@@ -92,21 +80,25 @@ function abrirModalRemoverItens() {
 
     <div class="d-flex align-center justify-center justify-sm-end ma-4 ga-2 ga-md-6 ">
 
-      <v-btn class=" botao bg-green" v-model="adicionar" @click="abrirModalAdicionarItens()">Adicionar
+      <v-btn class=" botao bg-green" v-model="adicionar" @click="abrirModalAdicionarItens()"> Adicionar
       </v-btn>
 
-      <v-btn class=" botao bg-red" v-model="remover" @click="abrirModalRemoverItens()">Remover
+      <v-btn class=" botao bg-red" v-model="remover" @click="abrirModalRemoverItens()"> Remover
       </v-btn>
 
-      <v-btn class=" botao bg-orange" v-model="modificar" @click="abrirModalModificarItens">Modificar
+      <v-btn class=" botao bg-orange" v-model="modificar" @click="abrirModalModificarItens"> Modificar
       </v-btn>
 
     </div>
   </v-card>
 
   <v-dialog max-width="500" v-model="state.abrirModalConfirmarDoAdicionar" z-index="1000">
-    <ModalAdicionar @cancelar="fecharModalAdicionarItens" @dadosBanco="exibirDados" class="bg-white">
+    <ModalAdicionar @cancelar="fecharModalAdicionarItens" @dadosBanco="exibirDados" :dadosDaHome="envioDeleteBackend"  class="bg-white">
     </ModalAdicionar>
+
+    <ModalRemover>
+    </ModalRemover>
+
   </v-dialog>
 
 </template>
