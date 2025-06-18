@@ -56,14 +56,12 @@ app.get("/api/dados", async (req, res) => {
 
 // teste delete
 app.post("/api/delete", async (req, res) => {
-  const {ids} = req.body;
-  console.log(ids)
+  const dadosDeExclusaoIdBackend = req.body;
   try {
     const conn = await pool.getConnection();
     await conn.query(
-      "DELETE FROM equimantos WHERE id IN (?)", [ids]
+      "DELETE FROM equimantos WHERE id IN (?)", [dadosDeExclusaoIdBackend]
     )
-
     conn.release()
     res.status(200).json({mensagem: "Dados apagados com sucesso"})
   } catch(err){
@@ -71,4 +69,3 @@ app.post("/api/delete", async (req, res) => {
   }
 })
 
-console.log();

@@ -23,7 +23,7 @@ async function enviandoDadosRemoviveis() {
             method: 'POST',
             headers:{
                 'Content-Type' : 'application/json',
-            }, body: JSON.stringify({ ids: dadosDeExclusaoIdBackend}) // porque passar chave?
+            }, body: JSON.stringify( dadosDeExclusaoIdBackend)
         })
          if (urlDeleteServer.ok){
             console.log('deu certo')
