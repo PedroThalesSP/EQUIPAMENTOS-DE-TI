@@ -18,6 +18,8 @@ const pool = mariadb.createPool({
   password: "",
   database: "equipamentos_de_ti",
 });
+
+// envio
 app.post("/api/submit", async (req, res) => {
   const { envioDeId, envioNome, envioUrl, envioPreco } = req.body;
   console.log(
@@ -44,7 +46,7 @@ app.post("/api/submit", async (req, res) => {
   }
 });
 
-//teste para mandar dados para o fron-end
+//manda dados para o fron-end
 app.get("/api/dados", async (req, res) => {
   try {
     const dados = await pool.query("SELECT * FROM equimantos ");
@@ -54,7 +56,7 @@ app.get("/api/dados", async (req, res) => {
   }
 });
 
-// teste delete
+// delete
 app.post("/api/delete", async (req, res) => {
   const dadosDeExclusaoIdBackend = req.body;
   try {
@@ -69,3 +71,23 @@ app.post("/api/delete", async (req, res) => {
   }
 })
 
+// update
+app.post("/api/modifica", async(req,res) => {
+    const {
+      name,
+      image,
+      value,
+      id,
+  } = req.body;
+    try{
+      const conn = await pool.getConnection();
+      await conn.query(
+        "UPDATE equimanto SET name = ?, image = ?, value = ? WHERE id = ?", 
+        [name, image, value, id]
+      )
+      conn.release()
+      res.status(200).json({mensage: "Dados modificados com sucesso"})
+    } catch(erro){
+      res.status(500).json({erro: "erro ao atualizar os itens"})
+    }
+})

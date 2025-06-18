@@ -90,7 +90,7 @@ function exibirDados(dados: any[]) {
       <v-btn class=" botao bg-red" v-model="remover" @click="abrirModalRemover()"> Remover
       </v-btn>
 
-      <v-btn class=" botao bg-orange" v-model="modificar" @click="abrirModalModificar()"> Modificar
+      <v-btn class=" botao bg-orange" v-model="modificar" @click="abrirModalModificar()  "> Modificar
       </v-btn>
 
     </div>
@@ -106,7 +106,7 @@ function exibirDados(dados: any[]) {
     </ModalRemover>
   </v-dialog>
 
-  <v-dialog max-width="500" v-model="state.abrirModalModificarItens" z-index="1000">
+  <v-dialog max-width="500" v-model="state.abrirModalModificarItens"  z-index="1000">
     <ModalModificar :dadosModificacao="envioModificacaoBackend" class="bg-white" > 
     </ModalModificar>
   </v-dialog>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Home from './Home.vue';
 import { computed, defineProps } from 'vue';
-import { ref } from 'vue';
 
 const props = defineProps({
     dadosDaHome: Array
