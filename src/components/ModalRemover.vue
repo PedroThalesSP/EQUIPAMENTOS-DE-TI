@@ -18,13 +18,12 @@ async function enviandoDadosRemoviveis() {
         // number, fazer a comparação com o bd e deleta-los
         const dadosDeExclusaoBackend = props.dadosDaHome;
         const dadosDeExclusaoIdBackend = dadosDeExclusaoBackend?.map(item => item.id)
-        console.log(dadosDeExclusaoIdBackend[0]) 
         
         const urlDeleteServer = await fetch ("http://localhost:3003/api/delete", {
             method: 'POST',
             headers:{
-                'Content-Type' : 'aplication/json',
-            }, body: JSON.stringify(dadosDeExclusaoBackend)
+                'Content-Type' : 'application/json',
+            }, body: JSON.stringify({ ids: dadosDeExclusaoIdBackend}) // porque passar chave?
         })
          if (urlDeleteServer.ok){
             console.log('deu certo')

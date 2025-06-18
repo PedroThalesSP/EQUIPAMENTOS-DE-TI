@@ -55,12 +55,13 @@ app.get("/api/dados", async (req, res) => {
 });
 
 // teste delete
-app.post("api/delete", async (req, res) => {
-  const {dadosDeExclusaoBackend} = req.body;
+app.post("/api/delete", async (req, res) => {
+  const {ids} = req.body;
+  console.log(ids)
   try {
     const conn = await pool.getConnection();
     await conn.query(
-      ""
+      "DELETE FROM equimantos WHERE id IN (?)", [ids]
     )
 
     conn.release()
