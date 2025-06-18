@@ -10,6 +10,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Home: typeof import('./src/components/Home.vue')['default']
     ModalAdicionar: typeof import('./src/components/ModalAdicionar.vue')['default']
+    ModalModificar: typeof import('./src/components/ModalModificar.vue')['default']
     ModalRemover: typeof import('./src/components/ModalRemover.vue')['default']
   }
 }

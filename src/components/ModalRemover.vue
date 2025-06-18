@@ -14,10 +14,8 @@ const nomeItensDeletar = computed(() => {
 async function enviandoDadosRemoviveis() {
     try {
 
-        // ver em casa o que esta acontecendo dentro do nosso array de objetos, pegar um por um dos dados do array, ver se são
-        // number, fazer a comparação com o bd e deleta-los
         const dadosDeExclusaoBackend = props.dadosDaHome;
-        const dadosDeExclusaoIdBackend = dadosDeExclusaoBackend?.map(item => item.id)
+        const dadosDeExclusaoIdBackend = dadosDeExclusaoBackend?.map(item => item .id)
         
         const urlDeleteServer = await fetch ("http://localhost:3003/api/delete", {
             method: 'POST',
@@ -33,40 +31,6 @@ async function enviandoDadosRemoviveis() {
         console.log('erro durante a requisição')
     }
 }
-
-//   async function envioAcessoriosDeTi(){
-//     try{
-
-//       const envioDeId = entradaDeId.value;
-//       const envioNome = entradaDeNome.value;
-//       const envioUrl = entradaDeArquivos.value;
-//       const envioPreco = entradaDeValores.value;
-      
-//       const dadosDoFormulario = {
-//         envioDeId: envioDeId,
-//         envioNome: envioNome,
-//         envioUrl: envioUrl,
-//         envioPreco: envioPreco,
-//       }
-       
-//       const urlServidor = await fetch('http://localhost:3003/api/submit',{
-//         method: 'POST',
-//         headers:{
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(dadosDoFormulario),
-//       })
-      
-//       if(urlServidor.ok){
-//         const respostaDoServidor = urlServidor.json()
-//         alert("Dados registrados com sucesso")
-//       } else{
-//         alert(" Erro ao registrar os dados",)
-//       }
-//     } catch(erro){
-//       console.error("erro durante a requisição:",erro)
-//     }
-//   }
 
 </script>
 

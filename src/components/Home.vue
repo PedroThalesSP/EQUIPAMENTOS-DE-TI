@@ -12,6 +12,7 @@ const envioDeleteBackend = ref <any[]>([])
 const state = reactive({
   abrirModalConfirmarDoAdicionar: false,
   abrirModalConfirmarDelete: false,
+  abrirModalModificarItens: false,
 })
 
 function abrirModalAdicionarItens() {
@@ -26,7 +27,8 @@ function abrirModalRemover(){
   }));
 }
 
-function abrirModalModificarItens() {
+function abrirModalModificar() {
+  state.abrirModalModificarItens = true
   console.log('modificar');
 }
 
@@ -55,7 +57,7 @@ function exibirDados(dados: any[]) {
       <div>
         <v-toolbar-title>
           <div class="d-flex ga-5">
-            <h1 class="text-subtitle-1 cursor-pointer">inicio</h1>
+            <h1 class="text-subtitle-1 cursor-pointer">atualizar</h1>
             <h1 class="text-subtitle-1 cursor-pointer">opções</h1>
           </div>
         </v-toolbar-title>
@@ -83,7 +85,7 @@ function exibirDados(dados: any[]) {
       <v-btn class=" botao bg-red" v-model="remover" @click="abrirModalRemover()"> Remover
       </v-btn>
 
-      <v-btn class=" botao bg-orange" v-model="modificar" @click="abrirModalModificarItens"> Modificar
+      <v-btn class=" botao bg-orange" v-model="modificar" @click="abrirModalModificar()"> Modificar
       </v-btn>
 
     </div>
@@ -97,6 +99,11 @@ function exibirDados(dados: any[]) {
   <v-dialog max-width="500" v-model="state.abrirModalConfirmarDelete" z-index="1000">
     <ModalRemover :dadosDaHome="envioDeleteBackend" >
     </ModalRemover>
+  </v-dialog>
+
+  <v-dialog max-width="500" v-model="state.abrirModalModificarItens" z-index="1000">
+    <ModalModificar class="bg-white"> 
+    </ModalModificar>
   </v-dialog>
 </template>
 
