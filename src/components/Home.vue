@@ -5,9 +5,10 @@ import { reactive } from 'vue';
 const adicionar = ref('')
 const remover = ref('')
 const modificar = ref('')
-const boxSelecionada = ref<Array<any>>([])
 const itens = ref<any[]>([])
+const boxSelecionada = ref<Array<any>>([])
 const envioDeleteBackend = ref <any[]>([])
+const envioModificacaoBackend = ref <any[]>([])
 
 const state = reactive({
   abrirModalConfirmarDoAdicionar: false,
@@ -21,6 +22,7 @@ function abrirModalAdicionarItens() {
 
 function abrirModalRemover(){
   state.abrirModalConfirmarDelete = true
+
   envioDeleteBackend.value = boxSelecionada.value.map(item => ({
     id:item.id,
     name:item.name
@@ -29,7 +31,10 @@ function abrirModalRemover(){
 
 function abrirModalModificar() {
   state.abrirModalModificarItens = true
-  console.log('modificar');
+  envioModificacaoBackend.value = boxSelecionada.value.map(item => ({
+    id:item.id,
+    name:item.name,
+  }))
 }
 
 function exibirDados(dados: any[]) {
@@ -102,7 +107,7 @@ function exibirDados(dados: any[]) {
   </v-dialog>
 
   <v-dialog max-width="500" v-model="state.abrirModalModificarItens" z-index="1000">
-    <ModalModificar class="bg-white"> 
+    <ModalModificar :dadosModificacao="envioModificacaoBackend" class="bg-white" > 
     </ModalModificar>
   </v-dialog>
 </template>
