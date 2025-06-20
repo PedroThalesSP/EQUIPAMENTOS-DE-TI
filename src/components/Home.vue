@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { reactive } from 'vue';
+import { computed } from 'vue';
 
 const adicionar = ref('')
 const remover = ref('')
@@ -59,12 +60,16 @@ function pesquisaItens(){
       break
     } 
   }
-
-  // console.log('teste')
-  // console.log(itens)
-  // console.log(produtoDigitadoValor)
-  // console.log(itemFiltrado)
 }
+
+const itensFiltrados = computed(()=>{
+ if(!produtoDigitado.value){
+   return itens.value
+ }
+ const termo = produtoDigitado.value.toUpperCase()
+ return itens.value.filter(item => item.name.toUpperCase().includes(termo))
+ 
+})
 
 </script>
 
@@ -91,11 +96,11 @@ function pesquisaItens(){
   <v-card class="barra-superior-card" flat>
     <v-card-title class="d-flex flex-row justify-space-between">
       <p class="d-none d-sm-block"> Lista de Equipamentos </p>
-      <v-text-field class="barra-de-pesquisa" v-model=produtoDigitado  @Keyup.enter="pesquisaItens" density="compact" label="PESQUISA" prepend-inner-icon="mdi-magnify"
+      <v-text-field class="barra-de-pesquisa" v-model=produtoDigitado density="compact" label="PESQUISA" prepend-inner-icon="mdi-magnify"
         variant="outlined" hide-details></v-text-field>
     </v-card-title>
 
-    <v-data-table :items="itens" item-value="id" items-per-page="5" show-select return-object v-model="boxSelecionada"
+    <v-data-table :items="itensFiltrados" item-value="id" items-per-page="5" show-select return-object v-model="boxSelecionada"
       class="elevation-3 ">
 
     </v-data-table>
