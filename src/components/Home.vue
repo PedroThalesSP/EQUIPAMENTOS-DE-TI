@@ -50,17 +50,17 @@ function exibirDados(dados: any[]) {
   }))
 }
 
-function pesquisaItens(){
-  const produtoDigitadoValor = produtoDigitado.value;
-  const itemFiltrado = itens.value.map(item => item.name)
+// function pesquisaItens(){
+//   const produtoDigitadoValor = produtoDigitado.value;
+//   const itemFiltrado = itens.value.map(item => item.name)
 
-  for(let i=0; i < produtoDigitadoValor.length; i++){
-    if(itemFiltrado[i] === produtoDigitadoValor){
-      alert("valor encontrado")
-      break
-    } 
-  }
-}
+//   for(let i=0; i < produtoDigitadoValor.length; i++){
+//     if(itemFiltrado[i] === produtoDigitadoValor){
+//       alert("valor encontrado")
+//       break
+//     } 
+//   }
+// }
 
 const itensFiltrados = computed(()=>{
  if(!produtoDigitado.value){
