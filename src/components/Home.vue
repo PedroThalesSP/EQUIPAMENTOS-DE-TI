@@ -53,17 +53,17 @@ function pesquisaItens(){
   const produtoDigitadoValor = produtoDigitado.value;
   const itemFiltrado = itens.value.map(item => item.name)
 
-  //fazer um laço de repetição para saber qual item foi selecionado e comparar com o nosso valor selecionado
-  // depois ocutar os dados que não batem com o digitado
-
-  if(produtoDigitadoValor == undefined){
-    console.log('item encontrado')
+  for(let i=0; i < produtoDigitadoValor.length; i++){
+    if(itemFiltrado[i] === produtoDigitadoValor){
+      alert("valor encontrado")
+      break
+    } 
   }
 
-  console.log('teste')
-  console.log(itens)
-  console.log(produtoDigitadoValor)
-  console.log(itemFiltrado)
+  // console.log('teste')
+  // console.log(itens)
+  // console.log(produtoDigitadoValor)
+  // console.log(itemFiltrado)
 }
 
 </script>
