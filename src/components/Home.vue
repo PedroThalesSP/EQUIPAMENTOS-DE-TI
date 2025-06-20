@@ -9,6 +9,7 @@ const itens = ref<any[]>([])
 const boxSelecionada = ref<Array<any>>([])
 const envioDeleteBackend = ref <any[]>([])
 const envioModificacaoBackend = ref <any[]>([])
+const produtoDigitado = ref('')
 
 const state = reactive({
   abrirModalConfirmarDoAdicionar: false,
@@ -48,6 +49,23 @@ function exibirDados(dados: any[]) {
   }))
 }
 
+function pesquisaItens(){
+  const produtoDigitadoValor = produtoDigitado.value;
+  const itemFiltrado = itens.value.map(item => item.name)
+
+  //fazer um laço de repetição para saber qual item foi selecionado e comparar com o nosso valor selecionado
+  // depois ocutar os dados que não batem com o digitado
+
+  if(produtoDigitadoValor == undefined){
+    console.log('item encontrado')
+  }
+
+  console.log('teste')
+  console.log(itens)
+  console.log(produtoDigitadoValor)
+  console.log(itemFiltrado)
+}
+
 </script>
 
 <template>
@@ -73,7 +91,7 @@ function exibirDados(dados: any[]) {
   <v-card class="barra-superior-card" flat>
     <v-card-title class="d-flex flex-row justify-space-between">
       <p class="d-none d-sm-block"> Lista de Equipamentos </p>
-      <v-text-field class="barra-de-pesquisa" density="compact" label="PESQUISA" prepend-inner-icon="mdi-magnify"
+      <v-text-field class="barra-de-pesquisa" v-model=produtoDigitado  @Keyup.enter="pesquisaItens" density="compact" label="PESQUISA" prepend-inner-icon="mdi-magnify"
         variant="outlined" hide-details></v-text-field>
     </v-card-title>
 

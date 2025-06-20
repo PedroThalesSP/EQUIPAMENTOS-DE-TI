@@ -21,8 +21,8 @@ async function envioModificacoes() {
     try{
         const id = props.dadosModificacao.map(item => item.id)
         const name = nomeModificado.value;
-        const image = image.value;
-        const value = value.value;
+        const image = urlModificado.value;
+        const value = valueModificado.value;
         
         const dadosDoFormularioModificado = {
             id:id,

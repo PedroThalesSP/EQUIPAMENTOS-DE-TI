@@ -82,7 +82,7 @@ app.post("/api/modifica", async(req,res) => {
     try{
       const conn = await pool.getConnection();
       await conn.query(
-        "UPDATE equimanto SET name = ?, image = ?, value = ? WHERE id = ?", 
+        "UPDATE equimantos SET name = ?, image = ?, value = ? WHERE id = ?", 
         [name, image, value, id]
       )
       conn.release()
